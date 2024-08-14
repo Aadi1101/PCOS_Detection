@@ -3,4 +3,7 @@ pandas
 seaborn
 openpyxl
 scikit-learn
+catboost
+xgboost
+dill
 -e .
