@@ -1,3 +1,11 @@
+"""
+logger.py
+
+This module provides a customizable logging utility for applications.
+It simplifies the process of logging messages and errors across various 
+levels of severity, including DEBUG, INFO, WARNING, ERROR, and CRITICAL.
+
+"""
 import logging
 import os
 from datetime import datetime

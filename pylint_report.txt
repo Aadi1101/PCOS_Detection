@@ -1,0 +1,14 @@
+************* Module src.utils
+src\utils.py:15:0: R0913: Too many arguments (6/5) (too-many-arguments)
+************* Module src.components.data_ingestion
+src\components\data_ingestion.py:29:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module src.components.data_transformation
+src\components\data_transformation.py:28:4: R0914: Too many local variables (17/15) (too-many-locals)
+src\components\data_transformation.py:21:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+************* Module src.components.model_trainer
+src\components\model_trainer.py:36:4: R0914: Too many local variables (16/15) (too-many-locals)
+src\components\model_trainer.py:28:0: R0903: Too few public methods (1/2) (too-few-public-methods)
+
+-----------------------------------
+Your code has been rated at 9.70/10
+

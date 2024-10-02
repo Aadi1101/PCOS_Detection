@@ -1,10 +1,11 @@
-import os, sys
-from src.logger import logging
-from src.exception import CustomException
-import numpy as np
-import pandas as pd
+"""
+Module for model training. This module includes the ModelTrainerConfig 
+class for configuration and the ModelTrainer class for handling the 
+training process of multiple machine learning models.
+"""
+import os
+import sys
 from dataclasses import dataclass
-
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -14,22 +15,45 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from catboost import CatBoostClassifier
 from xgboost import XGBClassifier
-
+from src.logger import logging
+from src.exception import CustomException
 from src.utils import evaluate_models,save_object, save_json_object
 
 @dataclass
 class ModelTrainerConfig():
+    """Configuration class for model training paths."""
     model_path = os.path.join('.','model.pkl')
     model_report_path = os.path.join('.','model_report.json')
 
 class ModelTrainer():
+    """
+    Class for training machine learning models. This class handles the 
+    training process, evaluates various models, and saves the best model.
+    """
     def __init__(self):
         self.model_trainer_config = ModelTrainerConfig()
-    
+
     def initiate_model_trainer(self,train_array,test_array):
+        """
+        Initiates the model training process.
+
+        Args:
+            train_array (np.ndarray): The training data as a 2D array, 
+                                      where the last column is the target variable.
+            test_array (np.ndarray): The testing data as a 2D array, 
+                                     where the last column is the target variable.
+
+        Returns:
+            tuple: A tuple containing the accuracy of the best model and its name.
+
+        Raises:
+            CustomException: If no suitable model is found or any other exception \
+                occurs during the process.
+        """
         try:
             logging.info('Model Training Started')
-            x_train,y_train,x_test,y_test = train_array[:,:-1], train_array[:,-1],test_array[:,:-1],test_array[:,-1]
+            x_train,y_train,x_test,y_test = train_array[:,:-1], train_array[:,-1],\
+                test_array[:,:-1],test_array[:,-1]
             models = {
                 "Logistic Regression":LogisticRegression(verbose=1),
                 "Decision Tree": DecisionTreeClassifier(),
@@ -97,8 +121,9 @@ class ModelTrainer():
             save_object(filepath=self.model_trainer_config.model_path,obj=best_model)
             predicted = best_model.predict(x_test)
             accuracy = accuracy_score(y_test,predicted)
-            logging.info(f"best model : {best_model_name} on both training and testing data with accuracy {accuracy}")
+            logging.info(f"best model : {best_model_name} on both training and testing data with\
+                          accuracy {accuracy}")
             save_json_object(filepath=self.model_trainer_config.model_report_path,obj=model_report)
             return(accuracy,best_model_name)
         except Exception as e:
-            raise CustomException(e,sys)
+            raise CustomException(e,sys) from e
