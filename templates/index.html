@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCOS Detection</title>
+</head>
+<body>
+<header>
+  <h1>PCOS Detection</h1>
+</header>
+<main>
+  <p>Welcome to the PCOS Detection page! Here, you can analyze various personal health parameters to assess potential indicators for Polycystic Ovary Syndrome (PCOS).</p>
+  
+  <h2>Health Parameters for PCOS Detection</h2>
+  <p>Understanding the relationship between personal health metrics and PCOS can provide valuable insights for early detection and management. Please refer to the following key health indicators:</p>
+  
+  <ul>
+    <li><strong>Age (yrs):</strong> The age of the individual in years.</li>
+    <li><strong>Weight (Kg):</strong> The weight of the individual in kilograms.</li>
+    <li><strong>Height (Cm):</strong> The height of the individual in centimeters.</li>
+    <li><strong>BMI:</strong> Body Mass Index calculated from height and weight.</li>
+    <li><strong>Blood Group:</strong> The individual's blood group.</li>
+    <li><strong>Pulse rate (bpm):</strong> The heart rate measured in beats per minute.</li>
+    <li><strong>RR (breaths/min):</strong> Respiratory rate, the number of breaths per minute.</li>
+    <li><strong>Hb (g/dl):</strong> Hemoglobin level in grams per deciliter.</li>
+    <li><strong>Cycle (R/I):</strong> Regular or irregular menstrual cycle.</li>
+    <li><strong>Cycle length (days):</strong> Length of the menstrual cycle in days.</li>
+    <li><strong>Marriage Status (Yrs):</strong> Number of years married.</li>
+    <li><strong>Pregnant (Y/N):</strong> Pregnancy status (Yes/No).</li>
+    <li><strong>No. of abortions:</strong> The number of abortions the individual has had.</li>
+    <li><strong>I beta-HCG (mIU/mL):</strong> First beta-Human Chorionic Gonadotropin level in mIU/mL.</li>
+    <li><strong>II beta-HCG (mIU/mL):</strong> Second beta-Human Chorionic Gonadotropin level in mIU/mL.</li>
+    <li><strong>FSH (mIU/mL):</strong> Follicle-stimulating hormone level in mIU/mL.</li>
+    <li><strong>LH (mIU/mL):</strong> Luteinizing hormone level in mIU/mL.</li>
+    <li><strong>FSH/LH:</strong> Ratio of FSH to LH levels.</li>
+    <li><strong>Hip (inch):</strong> Hip circumference in inches.</li>
+    <li><strong>Waist (inch):</strong> Waist circumference in inches.</li>
+    <li><strong>Waist:Hip Ratio:</strong> The ratio of waist to hip circumference.</li>
+    <li><strong>TSH (mIU/L):</strong> Thyroid-stimulating hormone level in mIU/L.</li>
+    <li><strong>AMH (ng/mL):</strong> Anti-Müllerian hormone level in ng/mL.</li>
+    <li><strong>PRL (ng/mL):</strong> Prolactin hormone level in ng/mL.</li>
+    <li><strong>Vit D3 (ng/mL):</strong> Vitamin D3 level in ng/mL.</li>
+    <li><strong>PRG (ng/mL):</strong> Progesterone hormone level in ng/mL.</li>
+    <li><strong>RBS (mg/dl):</strong> Random blood sugar level in mg/dL.</li>
+    <li><strong>Weight gain (Y/N):</strong> History of significant weight gain (Yes/No).</li>
+    <li><strong>Hair growth (Y/N):</strong> Presence of excess hair growth (Yes/No).</li>
+    <li><strong>Skin darkening (Y/N):</strong> Skin darkening in specific areas (Yes/No).</li>
+    <li><strong>Hair loss (Y/N):</strong> Hair loss or thinning (Yes/No).</li>
+    <li><strong>Pimples (Y/N):</strong> Frequent acne or pimples (Yes/No).</li>
+    <li><strong>Fast food (Y/N):</strong> Regular consumption of fast food (Yes/No).</li>
+    <li><strong>Reg. Exercise (Y/N):</strong> Engagement in regular physical exercise (Yes/No).</li>
+    <li><strong>BP Systolic (mmHg):</strong> Systolic blood pressure in mmHg.</li>
+    <li><strong>BP Diastolic (mmHg):</strong> Diastolic blood pressure in mmHg.</li>
+    <li><strong>Follicle No. (L):</strong> Number of follicles in the left ovary.</li>
+    <li><strong>Follicle No. (R):</strong> Number of follicles in the right ovary.</li>
+    <li><strong>Avg. F size (L) (mm):</strong> Average follicle size in the left ovary (in mm).</li>
+    <li><strong>Avg. F size (R) (mm):</strong> Average follicle size in the right ovary (in mm).</li>
+    <li><strong>Endometrium (mm):</strong> Thickness of the endometrial lining (in mm).</li>
+  </ul>
+
+  <p>For analysis, please enter the above parameters as comma-separated values.</p>
+
+  <br><br>
+  
+  <h2>Input Formats</h2>
+  <ul>
+    <li>Update URL: /predict?data=age,weight,height,bmi,blood_group,pulse_rate,rr,hb,cycle,cycle_length,marriage_status,pregnant,no_of_abortions,i_beta_HCG,ii_beta_HCG,fsh,lh,fsh_lh_ratio,hip,waist,waist_hip_ratio,tsh,amh,prl,vit_d3,prg,rbs,weight_gain,hair_growth,skin_darkening,hair_loss,pimples,fast_food,reg_exercise,bp_systolic,bp_diastolic,follicle_no_L,follicle_no_R,avg_f_size_L,avg_f_size_R,endometrium</li>
+    <li>Enter data as JSON: {"data":"age,weight,height,bmi,blood_group,pulse_rate,rr,hb,cycle,cycle_length,marriage_status,pregnant,no_of_abortions,i_beta_HCG,ii_beta_HCG,fsh,lh,fsh_lh_ratio,hip,waist,waist_hip_ratio,tsh,amh,prl,vit_d3,prg,rbs,weight_gain,hair_growth,skin_darkening,hair_loss,pimples,fast_food,reg_exercise,bp_systolic,bp_diastolic,follicle_no_L,follicle_no_R,avg_f_size_L,avg_f_size_R,endometrium"}</li>
+  </ul>
+</main>
+</body>
+</html>

@@ -5,22 +5,25 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
-from sklearn.impute import SimpleImputer
+from dataclasses import dataclass
+from src.utils import save_object
+
+@dataclass
+class DataTransformationConfig:
+    preprocessor_obj_file_path = os.path.join('.','preprocessor.pkl')
 
 class DataTransformation():
+    def __init__(self):
+        self.data_transformation_config = DataTransformationConfig()
     def initiate_data_transformation(self,trainset,testset):
         try:
             logging.info('Data Transformation Started')
             train_df = pd.read_csv(trainset)
             test_df = pd.read_csv(testset)
-            # print(f"Processing data : {train_df.columns[0]}")
             logging.info('Reading of training and testing data completed.')
             target_column_name = 'PCOS (Y/N)'
 
             logging.info('Handling missing values')
-            # imputer = SimpleImputer(strategy="most_frequent")
-            # train_df = imputer.fit_transform(train_df)
-            # test_df = imputer.transform(test_df)
             train_df = train_df.dropna()
             test_df = test_df.dropna()
             train_df = train_df.dropna(axis=1)
@@ -40,10 +43,12 @@ class DataTransformation():
             target_feature_test_df = test_df[target_column_name]
 
             logging.info('Preprocessing the features by StandardScaler')
-            # print("Data : ",input_feature_train_df)
             sc = StandardScaler()
             input_feature_train_arr = sc.fit_transform(input_feature_train_df)
             input_feature_test_arr = sc.transform(input_feature_test_df)
+
+            logging.info("Saving the preprocessor model")
+            save_object(self.data_transformation_config.preprocessor_obj_file_path,obj=sc)
 
             logging.info('Converting dataframes to numpy arrays')
             train_arr = np.c_[
