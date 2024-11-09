@@ -1,1 +1,90 @@
-{"Logistic Regression": 0.845679012345679, "Decision Tree": 0.8333333333333334, "Adaboost Classifier": 0.8765432098765432, "Gradient Boosting Classifier": 0.808641975308642, "Random Forest Classifier": 0.8950617283950617, "Support Vector Machine": 0.9074074074074074, "K Nearest Neighbour": 0.8518518518518519, "Naive Bayes": 0.8333333333333334, "Catboost Classifier": 0.9259259259259259, "XGBoost Classifier": 0.8827160493827161}
+{
+    "Logistic Regression": {
+        "best_test_accuracy": 0.9074074074074074, 
+        "best_train_accuracy": 0.8541114058355438, 
+        "accuracy_variance": -0.05329600157186365, 
+        "precision": 0.9130434782608695, 
+        "recall": 0.7924528301886793, 
+        "f1_score": 0.8484848484848485, 
+        "roc_auc_score": 0.9411459234897005, 
+        "best_features": [1, 2, 30, 31, 33, 37, 39], 
+        "best_params": {"penalty": "l2"}
+    }, 
+    "Decision Tree": {
+        "best_test_accuracy": 0.8827160493827161, 
+        "best_train_accuracy": 0.8488063660477454, 
+        "accuracy_variance": -0.033909683334970686, 
+        "precision": 0.8269230769230769, 
+        "recall": 0.8113207547169812, 
+        "f1_score": 0.819047619047619, 
+        "roc_auc_score": 0.8835900986671283, 
+        "best_features": [10, 33, 37], 
+        "best_params": {"max_depth": 20, "min_samples_leaf": 5, "min_samples_split": 2}
+    }, 
+    "Adaboost Classifier": {
+        "best_test_accuracy": 0.8827160493827161, 
+        "best_train_accuracy": 0.8885941644562334, 
+        "accuracy_variance": 0.00587811507351732, 
+        "precision": 0.8269230769230769, 
+        "recall": 0.8113207547169812, 
+        "f1_score": 0.819047619047619, 
+        "roc_auc_score": 0.9377704691016098, 
+        "best_features": [24, 29, 30, 37], 
+        "best_params": {"learning_rate": 0.05, "n_estimators": 300}
+    }, 
+    "Random Forest Classifier": {
+        "best_test_accuracy": 0.9074074074074074, 
+        "best_train_accuracy": 0.8938992042440318, 
+        "accuracy_variance": -0.013508203163375643, 
+        "precision": 0.8958333333333334, 
+        "recall": 0.8113207547169812, 
+        "f1_score": 0.8514851485148515, 
+        "roc_auc_score": 0.963302752293578, 
+        "best_features": [3, 8, 14, 17, 28, 37], 
+        "best_params": {"criterion": "gini", "max_depth": 400, "max_features": "sqrt", "min_samples_leaf": 10, "min_samples_split": 5, "n_estimators": 500}
+    }, 
+    "Support Vector Machine": {
+        "best_test_accuracy": 0.8580246913580247, 
+        "best_train_accuracy": 0.8169761273209549, 
+        "accuracy_variance": -0.0410485640370698, 
+        "precision": 0.8409090909090909, 
+        "recall": 0.6981132075471698, 
+        "f1_score": 0.7628865979381443, 
+        "roc_auc_score": 0.9015059719577636, 
+        "best_features": [4, 8, 26, 36], 
+        "best_params": {"gamma": 0.1, "kernel": "sigmoid"}
+    }, 
+    "Naive Bayes": {
+        "best_test_accuracy": 0.7592592592592593, 
+        "best_train_accuracy": 0.7931034482758621, 
+        "accuracy_variance": 0.0338441890166028, 
+        "precision": 0.6666666666666666, 
+        "recall": 0.5283018867924528, 
+        "f1_score": 0.5894736842105263, 
+        "roc_auc_score": 0.7843171196122556, 
+        "best_features": [0, 7, 13, 19, 28, 31], 
+        "best_params": {}
+    }, 
+    "K Nearest Neighbour": {
+        "best_test_accuracy": 0.8518518518518519, 
+        "best_train_accuracy": 0.7692307692307693, 
+        "accuracy_variance": -0.08262108262108259, 
+        "precision": 0.9142857142857143, 
+        "recall": 0.6037735849056604, 
+        "f1_score": 0.7272727272727272, 
+        "roc_auc_score": 0.8130517569672842, 
+        "best_features": [0, 4, 8, 15, 18, 20, 25, 27, 35], 
+        "best_params": {"metric": "euclidean", "n_neighbors": 20}
+    }, 
+    "XGBoost Classifier": {
+        "best_test_accuracy": 0.8641975308641975, 
+        "best_train_accuracy": 0.9204244031830239, 
+        "accuracy_variance": 0.05622687231882639, 
+        "precision": 0.8780487804878049, 
+        "recall": 0.6792452830188679, 
+        "f1_score": 0.7659574468085106, 
+        "roc_auc_score": 0.9086030811840056, 
+        "best_features": [0, 3, 6, 7, 18, 30, 32, 37], 
+        "best_params": {"learning_rate": 0.01, "max_depth": 10, "n_estimators": 200}
+    }
+}

@@ -5,6 +5,7 @@ training process of multiple machine learning models.
 """
 import os
 import sys
+import numpy as np
 from dataclasses import dataclass
 from sklearn.metrics import accuracy_score
 from sklearn.linear_model import LogisticRegression
@@ -58,13 +59,11 @@ class ModelTrainer():
                 "Logistic Regression":LogisticRegression(verbose=1),
                 "Decision Tree": DecisionTreeClassifier(),
                 "Adaboost Classifier":AdaBoostClassifier(),
-                "Gradient Boosting Classifier":GradientBoostingClassifier(verbose=1),
                 "Random Forest Classifier": RandomForestClassifier(verbose=1),
-                "Support Vector Machine": SVC(verbose=True),
-                "K Nearest Neighbour":KNeighborsClassifier(),
+                "Support Vector Machine": SVC(verbose=True,probability=True),
                 "Naive Bayes":GaussianNB(),
-                "Catboost Classifier": CatBoostClassifier(verbose=1),
-                "XGBoost Classifier": XGBClassifier()
+                "K Nearest Neighbour":KNeighborsClassifier(),
+                "XGBoost Classifier": XGBClassifier(),
             }
 
             params = {
@@ -72,54 +71,57 @@ class ModelTrainer():
                     'penalty':['l2']
                 },
                 "Decision Tree": {
-                    "max_depth":[10,20,30],
-                    "min_samples_split":[2,5,10]
+                    "max_depth":[20,30,40,None],
+                    "min_samples_split":[2,5,10,20],
+                    "min_samples_leaf":[1,5,10,None]
                 },
                 "Adaboost Classifier": {
-                    "n_estimators":[100,150,200],
-                    "learning_rate":[0.1,0.01,0.001]
-                },
-                "Gradient Boosting Classifier":{
-                    "n_estimators":[100,150,200],
-                    "max_depth":[10,20,30],
-                    "learning_rate":[0.1,0.01,0.001]
+                    "n_estimators":[200,300,400],
+                    "learning_rate":[0.001,0.01,0.05]
                 },
                 "Random Forest Classifier":{
-                    'n_estimators':[450],
-                    'max_features':['log2'],
-                    'max_depth':[340],
-                    'min_samples_split':[3],
-                    'min_samples_leaf':[8,10,12],
-                    'criterion':['gini']
+                    'n_estimators':[500,700],
+                    'max_features':['sqrt','log2'],
+                    'max_depth':[300,400],
+                    'min_samples_split':[2,5],
+                    'min_samples_leaf':[1,10],
+                    'criterion':['gini','entropy']
                 },
                 "Support Vector Machine":{
                     'kernel':['linear','poly','sigmoid','rbf'],
-                    'gamma':['scale','auto']
+                    'gamma':['scale','auto',0.01,0.1]
                 },
                 "K Nearest Neighbour":{
-                    'metric':['euclidean']
+                    'n_neighbors':[5,10,20],
+                    'metric':['euclidean','manhatten']
                 },
                 "Naive Bayes":{},
-                "Catboost Classifier":{
-                    'learning_rate':[0.1,0.01,0.001],
-                    'depth':[10,20,30],
-                    'iterations':[100,150,200],
-                    'l2_leaf_reg':[2,3,4]
-                },
-                "XGBoost Classifier":{}
+                "XGBoost Classifier":{
+                    'n_estimators':[200,300,400],
+                    'max_depth':[10,20,30],
+                    'learning_rate':[0.001,0.01,0.05]
+                }
             }
-
-            model_report:dict = evaluate_models(x_train,y_train,x_test,y_test,models,params)
-            best_model_score = max(sorted(model_report.values()))
-            best_model_name = list(model_report.keys())[
-                list(model_report.values()).index(best_model_score)
-            ]
+            
+            model_report:dict = evaluate_models(x_train,y_train,x_test,y_test,models,params,epsilon=0.5,alpha=0.01,gamma=0.99)
+            best_model_name = max(model_report,key=lambda name: model_report[name]["best_test_accuracy"])
+            best_model_score = model_report[best_model_name]["best_test_accuracy"]
             best_model = models[best_model_name]
+            selected_features = model_report[best_model_name]["best_features"]
+            # for i in range(len(selected_features)):
+            #     selected_features[i] += 20
+            print("Selected features for best model ", selected_features)
+            # selected_columns = [0,4,5,6,7,10,14,17,18,19] + [20,21,23,24,38,39]
+            # x_test = x_test[:,selected_features]
+            best_model = best_model.__class__(**model_report[best_model_name]["best_params"])
+            x_train = np.nan_to_num(x_train, nan=0.0, posinf=0.0, neginf=0.0)
+            x_test = np.nan_to_num(x_test, nan=0.0, posinf=0.0, neginf=0.0)
+            best_model.fit(x_train[:,selected_features],y_train)
 
             if best_model_score < 0.6:
                 raise CustomException("No best model found.",sys)
             save_object(filepath=self.model_trainer_config.model_path,obj=best_model)
-            predicted = best_model.predict(x_test)
+            predicted = best_model.predict(x_test[:,selected_features])
             accuracy = accuracy_score(y_test,predicted)
             logging.info(f"best model : {best_model_name} on both training and testing data with\
                           accuracy {accuracy}")
