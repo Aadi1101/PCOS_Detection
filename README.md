@@ -12,6 +12,7 @@ This project detects Polycystic Ovary Syndrome (PCOS) using machine learning mod
 - [API Endpoints](#api-endpoints)
 - [ML Model](#ml-model)
 - [Model Tuning and Preprocessing](#model-tuning-and-preprocessing)
+- [Feature Selection using Reinforcement Learning](feature-selection-using-reinforcement-learning)
 - [Future Enhancements](#future-enhancements)
 - [References or Documentation Links](#references-or-documentation-links)
 - [Contributing](#contributing)
@@ -154,6 +155,18 @@ grid_search.fit(X_train, y_train)
 best_params = grid_search.best_params_
 ```
 This process was essential in selecting the optimal model parameters and improving prediction performance.
+
+## Feature Selection Using Reinforcement Learning
+In addition to traditional machine learning methods, this project employs Reinforcement Learning (RL) for automatic feature selection. By using a Q-learning approach, the model dynamically selects the most relevant features during training. This method balances exploration and exploitation to identify the feature set that maximizes model performance over multiple training episodes.
+
+### Key Components:
+- **State Representation**: A binary vector representing selected features.
+- **Action Selection**: The RL agent chooses which feature to toggle (select or exclude).
+- **Reward**: Generated based on model accuracy.
+- **Q-table Update**: The Q-table is updated after each step using the Bellman equation to improve future decisions.
+- **Exploration vs Exploitation**: The epsilon-greedy strategy balances between trying new features (exploration) and relying on known effective features (exploitation).
+
+This method helps optimize feature selection, leading to better model performance and potentially reducing overfitting.
 
 ## Future Enhancements
 - Implement a more detailed user interface for better user experience.
