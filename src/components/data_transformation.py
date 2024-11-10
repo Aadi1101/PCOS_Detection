@@ -84,3 +84,34 @@ class DataTransformation():
             )
         except Exception as e:
             raise CustomException(e,sys) from e
+
+    
+    def selected_scaling(self,trainset,testset,selected_features):
+        try:
+            logging.info('Data Transformation Started for selected features')
+            train_df = pd.read_csv(trainset,usecols=selected_features)
+            test_df = pd.read_csv(testset,usecols=selected_features)
+            logging.info('Reading of training and testing data completed for selected features.')
+
+            logging.info('Handling missing values')
+            train_df = train_df.dropna()
+            test_df = test_df.dropna()
+            train_df = train_df.dropna(axis=1)
+            test_df  = test_df.dropna(axis=1)
+
+            logging.info('Converting all the columns present in data to numeric format.')
+            for column in train_df:
+                train_df[column] = pd.to_numeric(train_df[column],errors='coerce')
+            for column in test_df:
+                test_df[column] = pd.to_numeric(test_df[column],errors='coerce')
+
+            logging.info('Preprocessing the features by StandardScaler')
+            sc = StandardScaler()
+            input_feature_train_arr = sc.fit_transform(train_df)
+            input_feature_test_arr = sc.transform(test_df)
+
+            save_object(self.data_transformation_config.preprocessor_obj_file_path,obj=sc)
+            logging.info("Saved the updated preprocessor model for selected features")
+
+        except Exception as e:
+            raise CustomException(e,sys)

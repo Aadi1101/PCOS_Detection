@@ -126,6 +126,6 @@ class ModelTrainer():
             logging.info(f"best model : {best_model_name} on both training and testing data with\
                           accuracy {accuracy}")
             save_json_object(filepath=self.model_trainer_config.model_report_path,obj=model_report)
-            return(accuracy,best_model_name)
+            return(accuracy,best_model_name,selected_features)
         except Exception as e:
             raise CustomException(e,sys) from e

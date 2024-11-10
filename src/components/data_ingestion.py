@@ -72,6 +72,7 @@ if __name__ == '__main__':
     train_arr, test_arr = \
     transform_obj.initiate_data_transformation(trainset=train_path,testset=test_path)
     model_trainer_obj = ModelTrainer()
-    accuracy, best_model_name = \
+    accuracy, best_model_name,selected_features = \
         model_trainer_obj.initiate_model_trainer(train_array=train_arr,test_array=test_arr)
+    transform_obj.selected_scaling(trainset=train_path,testset=test_path,selected_features=selected_features)
     print(f"Best Model for the data is {best_model_name} with accuracy {accuracy}")
