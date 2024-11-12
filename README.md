@@ -33,7 +33,6 @@ The following technologies are used in this project:
 - **Framework**: Flask (for building the web application)
 - **Machine Learning Libraries**:
   - **scikit-learn**
-  - **catboost**
   - **xgboost**
   - **GridSearchCV** (for hyperparameter tuning)
   - **StandardScaler** (for data normalization)
@@ -128,18 +127,17 @@ The system expects the following input parameters (comma-separated or via JSON):
 
 ## ML Model
 - Algorithms:
-    - CatBoost: A gradient boosting algorithm used for building the model.
-    - XGBoost: Another gradient boosting algorithm for comparison.
+    - XGBoost: A gradient boosting algorithm for comparison.
     - Model Training: The model was trained using health and hormone metrics relevant to PCOS diagnosis.
     - Model Serialization: The model is saved in a model.pkl file, and dill is used for model serialization.
 ## Model Tuning and Preprocessing
 - Preprocessing:
 
-    - The input data was normalized using StandardScaler to ensure that all features were on the same scale, which is important for algorithms like XGBoost and CatBoost.
+    - The input data was normalized using StandardScaler to ensure that all features were on the same scale, which is important for algorithms like XGBoost and SVM.
 
 - Hyperparameter Tuning:
 
-    - GridSearchCV was used for hyperparameter optimization to find the best combination of parameters for the machine learning models. The grid search was applied to both CatBoost and XGBoost models to improve accuracy.
+    - GridSearchCV was used for hyperparameter optimization to find the best combination of parameters for the machine learning models. The grid search was applied to both SVM and XGBoost models to improve accuracy.
     Example:
 ```python
 from sklearn.model_selection import GridSearchCV
@@ -176,7 +174,6 @@ This method helps optimize feature selection, leading to better model performanc
 ## References or Documentation Links
 - [Flask Documentation](https://flask.palletsprojects.com/en/3.0.x/)
 - [scikit-learn Documentation](https://scikit-learn.org/stable/)
-- [Catboost Documentation](https://catboost.ai/en/docs/concepts/python-reference_catboostclassifier)
 - [Xgboost Documentation](https://xgboost.readthedocs.io/en/stable/python/index.html#)
 
 ## Contributing

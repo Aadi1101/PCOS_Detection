@@ -108,11 +108,7 @@ class ModelTrainer():
             best_model_score = model_report[best_model_name]["best_test_accuracy"]
             best_model = models[best_model_name]
             selected_features = model_report[best_model_name]["best_features"]
-            # for i in range(len(selected_features)):
-            #     selected_features[i] += 20
             print("Selected features for best model ", selected_features)
-            # selected_columns = [0,4,5,6,7,10,14,17,18,19] + [20,21,23,24,38,39]
-            # x_test = x_test[:,selected_features]
             best_model = best_model.__class__(**model_report[best_model_name]["best_params"])
             x_train = np.nan_to_num(x_train, nan=0.0, posinf=0.0, neginf=0.0)
             x_test = np.nan_to_num(x_test, nan=0.0, posinf=0.0, neginf=0.0)
